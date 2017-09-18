@@ -3,7 +3,7 @@
   (general
     (links 45)
     (no_connects 1)
-    (area 42.709499 29.609499 73.090501 54.990501)
+    (area 42.044999 28.944999 282.371482 165.089523)
     (thickness 1.6002)
     (drawings 12)
     (tracks 147)
@@ -15,7 +15,7 @@
   (page A4)
   (title_block
     (title "Rotary Encoder Bricklet")
-    (date 2017-09-15)
+    (date 2017-09-18)
     (rev 2.0)
     (company "Tinkerforge GmbH")
     (comment 1 "Licensed under CERN OHL v.1.1")
@@ -43,7 +43,7 @@
   )
 
   (setup
-    (last_trace_width 0.25)
+    (last_trace_width 0.29972)
     (user_trace_width 0.2)
     (user_trace_width 0.25)
     (user_trace_width 0.3)
@@ -6158,7 +6158,7 @@
     (pad "" np_thru_hole circle (at 0 -5.6 180) (size 2.5 2.5) (drill 2.5) (layers *.Cu *.Mask F.SilkS))
   )
 
-  (gr_text status (at 61.15 51.1) (layer F.SilkS)
+  (gr_text status (at 61.15 51.05) (layer F.SilkS)
     (effects (font (size 0.7 0.7) (thickness 0.12)))
   )
   (gr_line (start 42.9 52.3) (end 42.9 32.3) (angle 90) (layer Edge.Cuts) (width 0.381))
@@ -6284,11 +6284,11 @@
   (segment (start 56.4 47.1) (end 56.4 46.1) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFE0))
   (segment (start 56.7 47.4) (end 56.4 47.1) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFDF))
   (segment (start 52.25 50.125) (end 52.25 50.65) (width 0.25) (layer Vorderseite) (net 15))
-  (segment (start 70.55 46) (end 71.75 44.8) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC9))
-  (segment (start 62.6 46) (end 70.55 46) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC8))
-  (segment (start 62 46.6) (end 62.6 46) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC7))
-  (segment (start 57.6 46.6) (end 62 46.6) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC6))
-  (segment (start 56.7 47.5) (end 57.6 46.6) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC5))
+  (segment (start 70.5 46.05) (end 71.75 44.8) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC9) (status 800000))
+  (segment (start 62.55 46.05) (end 70.5 46.05) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC8))
+  (segment (start 61.1 47.5) (end 62.55 46.05) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC7))
+  (segment (start 56.7 47.5) (end 61.1 47.5) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC6))
+  (segment (start 56.7 47.5) (end 56.7 47.5) (width 0.25) (layer Vorderseite) (net 15) (tstamp 59BFBFC5))
   (via (at 56.7 47.5) (size 0.55) (drill 0.25) (layers Vorderseite Rückseite) (net 15))
   (segment (start 54.8 47.5) (end 56.7 47.5) (width 0.25) (layer Rückseite) (net 15) (tstamp 59BFBFC2))
   (segment (start 51.5 50.8) (end 54.8 47.5) (width 0.25) (layer Rückseite) (net 15) (tstamp 59BFBFC1))
