@@ -1,7 +1,7 @@
 /* rotary-encoder-v2-bricklet
  * Copyright (C) 2017 Olaf Lüke <olaf@tinkerforge.com>
  *
- * main.c: Initialization for Rotary Encoder V2 Bricklet
+ * encoder.c: Driver for rotary encoder
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,27 +19,15 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <stdio.h>
-#include <stdbool.h>
+#ifndef ENCODER_H
+#define ENCODER_H
 
-#include "configs/config.h"
+typedef struct {
 
-#include "bricklib2/bootloader/bootloader.h"
-#include "bricklib2/hal/system_timer/system_timer.h"
-#include "bricklib2/logging/logging.h"
-#include "communication.h"
-#include "encoder.h"
+} Encoder;
 
-int main(void) {
-	logging_init();
-	logd("Start Rotary Encoder V2 Bricklet\n\r");
+void encoder_init(void);
+void encoder_tick(void);
 
-	communication_init();
-	encoder_init();
 
-	while(true) {
-		bootloader_tick();
-		communication_tick();
-		encoder_tick();
-	}
-}
+#endif

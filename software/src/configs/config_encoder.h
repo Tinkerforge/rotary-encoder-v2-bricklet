@@ -1,7 +1,7 @@
 /* rotary-encoder-v2-bricklet
  * Copyright (C) 2017 Olaf Lüke <olaf@tinkerforge.com>
  *
- * main.c: Initialization for Rotary Encoder V2 Bricklet
+ * config_encoder.h: Configurations for rotary encoder
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,27 +19,29 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#include <stdio.h>
-#include <stdbool.h>
+#ifndef CONFIG_ENCODER_H
+#define CONFIG_ENCODER_H
 
-#include "configs/config.h"
+#include "xmc_gpio.h"
 
-#include "bricklib2/bootloader/bootloader.h"
-#include "bricklib2/hal/system_timer/system_timer.h"
-#include "bricklib2/logging/logging.h"
-#include "communication.h"
-#include "encoder.h"
+#define ENCODER_A_PIN          P2_1
+#define ENCODER_B_PIN          P2_2
+#define ENCODER_BUTTON_PIN     P2_10
 
-int main(void) {
-	logging_init();
-	logd("Start Rotary Encoder V2 Bricklet\n\r");
+#define ENCODER_A_ETL_CHANNEL  1
+#define ENCODER_A_OGU_CHANNEL  1
 
-	communication_init();
-	encoder_init();
+#define ENCODER_A_IRQ_N        4
+#define ENCODER_A_IRQ_PRIO     0
 
-	while(true) {
-		bootloader_tick();
-		communication_tick();
-		encoder_tick();
-	}
-}
+#define ENCODER_B_ETL_CHANNEL  0
+#define ENCODER_B_OGU_CHANNEL  0
+
+#define ENCODER_B_IRQ_N        3
+#define ENCODER_B_IRQ_PRIO     0
+
+#define ENCODER_DEBOUNCE_TIME  100 // in us
+#define ENCODER_DEBOUNCE_PRIO  1
+
+
+#endif
