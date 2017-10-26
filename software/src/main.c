@@ -28,15 +28,18 @@
 #include "bricklib2/hal/system_timer/system_timer.h"
 #include "bricklib2/logging/logging.h"
 #include "communication.h"
+#include "encoder.h"
 
 int main(void) {
 	logging_init();
 	logd("Start Rotary Encoder V2 Bricklet\n\r");
 
 	communication_init();
+	encoder_init();
 
 	while(true) {
 		bootloader_tick();
 		communication_tick();
+		encoder_tick();
 	}
 }

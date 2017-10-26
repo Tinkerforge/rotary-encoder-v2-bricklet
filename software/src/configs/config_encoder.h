@@ -1,7 +1,7 @@
 /* rotary-encoder-v2-bricklet
  * Copyright (C) 2017 Olaf Lüke <olaf@tinkerforge.com>
  *
- * config_logging.h: Logging configuration for Rotary Encoder V2 Bricklet
+ * config_encoder.h: Configurations for rotary encoder
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,17 +19,29 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef CONFIG_LOGGING_H
-#define CONFIG_LOGGING_H
+#ifndef CONFIG_ENCODER_H
+#define CONFIG_ENCODER_H
 
-//#define LOGGING_UARTBB
-//#define LOGGING_LEVEL LOGGING_DEBUG
-#define LOGGING_LEVEL LOGGING_NONE
+#include "xmc_gpio.h"
 
-#define LOGGING_USE_BASENAME
-#define LOGGING_HAVE_SYSTEM_TIME
-#define LOGGING_TIMESTAMP_FORMAT "%u "
-#define LOGGING_SYSTEM_TIME_HEADER "bricklib2/hal/system_timer/system_timer.h"
-#define LOGGING_SYSTEM_TIME_FUNCTION system_timer_get_ms
+#define ENCODER_A_PIN          P2_1
+#define ENCODER_B_PIN          P2_2
+#define ENCODER_BUTTON_PIN     P2_10
+
+#define ENCODER_A_ETL_CHANNEL  1
+#define ENCODER_A_OGU_CHANNEL  1
+
+#define ENCODER_A_IRQ_N        4
+#define ENCODER_A_IRQ_PRIO     0
+
+#define ENCODER_B_ETL_CHANNEL  0
+#define ENCODER_B_OGU_CHANNEL  0
+
+#define ENCODER_B_IRQ_N        3
+#define ENCODER_B_IRQ_PRIO     0
+
+#define ENCODER_DEBOUNCE_TIME  100 // in us
+#define ENCODER_DEBOUNCE_PRIO  1
+
 
 #endif

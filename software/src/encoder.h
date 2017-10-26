@@ -1,7 +1,7 @@
 /* rotary-encoder-v2-bricklet
  * Copyright (C) 2017 Olaf Lüke <olaf@tinkerforge.com>
  *
- * config_logging.h: Logging configuration for Rotary Encoder V2 Bricklet
+ * encoder.c: Driver for rotary encoder
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,17 +19,15 @@
  * Boston, MA 02111-1307, USA.
  */
 
-#ifndef CONFIG_LOGGING_H
-#define CONFIG_LOGGING_H
+#ifndef ENCODER_H
+#define ENCODER_H
 
-//#define LOGGING_UARTBB
-//#define LOGGING_LEVEL LOGGING_DEBUG
-#define LOGGING_LEVEL LOGGING_NONE
+typedef struct {
 
-#define LOGGING_USE_BASENAME
-#define LOGGING_HAVE_SYSTEM_TIME
-#define LOGGING_TIMESTAMP_FORMAT "%u "
-#define LOGGING_SYSTEM_TIME_HEADER "bricklib2/hal/system_timer/system_timer.h"
-#define LOGGING_SYSTEM_TIME_FUNCTION system_timer_get_ms
+} Encoder;
+
+void encoder_init(void);
+void encoder_tick(void);
+
 
 #endif
