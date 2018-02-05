@@ -1,9 +1,9 @@
-(kicad_pcb (version 4) (host pcbnew 4.0.7-e2-6376~58~ubuntu17.04.1)
+(kicad_pcb (version 4) (host pcbnew 4.0.2+dfsg1-stable)
 
   (general
     (links 49)
     (no_connects 0)
-    (area 42.044999 28.944999 282.27147 165.489573)
+    (area 42.709499 29.609499 73.090501 54.990501)
     (thickness 1.6002)
     (drawings 12)
     (tracks 163)
@@ -6114,6 +6114,11 @@
       (net 1 GND))
     (pad "" np_thru_hole circle (at 0 5.6 180) (size 2.5 2.5) (drill 2.5) (layers *.Cu *.Mask F.SilkS))
     (pad "" np_thru_hole circle (at 0 -5.6 180) (size 2.5 2.5) (drill 2.5) (layers *.Cu *.Mask F.SilkS))
+    (model RotaryEncoder.wrl
+      (at (xyz 0.005 0 0.23))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 90 0 -90))
+    )
   )
 
   (module kicad-libraries:WEEE_7mm (layer Rückseite) (tedit 5922FFAE) (tstamp 59BFD006)
