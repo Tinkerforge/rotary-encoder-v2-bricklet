@@ -43,5 +43,6 @@
 #define ENCODER_DEBOUNCE_TIME  100 // in us
 #define ENCODER_DEBOUNCE_PRIO  1
 
+#define ENCODER_BUTTON_DEBOUNCE_TIME 50 // in ms
 
 #endif

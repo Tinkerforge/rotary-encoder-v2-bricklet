@@ -22,12 +22,21 @@
 #ifndef ENCODER_H
 #define ENCODER_H
 
-typedef struct {
+#include <stdint.h>
+#include <stdbool.h>
 
+typedef struct {
+	uint32_t button_change_time;
+	bool button_last_state;
+
+	bool button_callback_new;
+	bool button_callback_state;
+
+	bool reset_after_get;
 } Encoder;
 
 void encoder_init(void);
 void encoder_tick(void);
-
+int32_t encoder_get_count(void);
 
 #endif

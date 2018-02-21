@@ -34,6 +34,12 @@ void communication_tick(void);
 void communication_init(void);
 
 // Constants
+#define ROTARY_ENCODER_V2_THRESHOLD_OPTION_OFF 'x'
+#define ROTARY_ENCODER_V2_THRESHOLD_OPTION_OUTSIDE 'o'
+#define ROTARY_ENCODER_V2_THRESHOLD_OPTION_INSIDE 'i'
+#define ROTARY_ENCODER_V2_THRESHOLD_OPTION_SMALLER '<'
+#define ROTARY_ENCODER_V2_THRESHOLD_OPTION_GREATER '>'
+
 #define ROTARY_ENCODER_V2_BOOTLOADER_MODE_BOOTLOADER 0
 #define ROTARY_ENCODER_V2_BOOTLOADER_MODE_FIRMWARE 1
 #define ROTARY_ENCODER_V2_BOOTLOADER_MODE_BOOTLOADER_WAIT_FOR_REBOOT 2
@@ -53,19 +59,47 @@ void communication_init(void);
 #define ROTARY_ENCODER_V2_STATUS_LED_CONFIG_SHOW_STATUS 3
 
 // Function and callback IDs and structs
+#define FID_GET_COUNT 1
+#define FID_SET_COUNT_CALLBACK_CONFIGURATION 2
+#define FID_GET_COUNT_CALLBACK_CONFIGURATION 3
+#define FID_IS_PRESSED 5
 
+#define FID_CALLBACK_COUNT 4
+#define FID_CALLBACK_PRESSED 6
+#define FID_CALLBACK_RELEASED 7
 
+typedef struct {
+	TFPMessageHeader header;
+} __attribute__((__packed__)) IsPressed;
+
+typedef struct {
+	TFPMessageHeader header;
+	bool pressed;
+} __attribute__((__packed__)) IsPressed_Response;
+
+typedef struct {
+	TFPMessageHeader header;
+} __attribute__((__packed__)) Pressed_Callback;
+
+typedef struct {
+	TFPMessageHeader header;
+} __attribute__((__packed__)) Released_Callback;
 
 
 // Function prototypes
-
+BootloaderHandleMessageResponse is_pressed(const IsPressed *data, IsPressed_Response *response);
 
 // Callbacks
-
+bool handle_count_callback(void);
+bool handle_pressed_callback(void);
+bool handle_released_callback(void);
 
 #define COMMUNICATION_CALLBACK_TICK_WAIT_MS 1
-#define COMMUNICATION_CALLBACK_HANDLER_NUM 0
+#define COMMUNICATION_CALLBACK_HANDLER_NUM 3
 #define COMMUNICATION_CALLBACK_LIST_INIT \
+	handle_count_callback, \
+	handle_pressed_callback, \
+	handle_released_callback, \
 
 
 #endif

@@ -21,6 +21,10 @@
 
 #include "encoder.h"
 
+#include <string.h>
+
+#include "bricklib2/hal/system_timer/system_timer.h"
+
 #include "configs/config.h"
 #include "configs/config_encoder.h"
 
@@ -44,7 +48,6 @@ const int8_t encoder_table[4][4] = {
 Encoder encoder;
 
 static int32_t encoder_count = 0;
-
 static int8_t encoder_last_value = 0;
 
 // We do the actual measurements in the debounce handler.
@@ -53,7 +56,6 @@ static int8_t encoder_last_value = 0;
 // If the pot is turned at "maximum human speed" the edges chage about every 500us, so with 100us debounce
 // we still have a big margin of error.
 void __attribute__((optimize("-O3"))) __attribute__ ((section (".ram_code"))) encoder_debounce_a_handler(void) {
-//	XMC_GPIO_SetOutputHigh(UARTBB_TX_PIN);
 	NVIC_ClearPendingIRQ(ENCODER_A_IRQ_N);
 	NVIC_EnableIRQ(ENCODER_A_IRQ_N);
 
@@ -62,12 +64,9 @@ void __attribute__((optimize("-O3"))) __attribute__ ((section (".ram_code"))) en
 	int8_t add = encoder_table[encoder_last_value][encoder_value];
 	encoder_count += add;
 	encoder_last_value = encoder_value;
-
-//	XMC_GPIO_SetOutputLow(UARTBB_TX_PIN);
 }
 
 void __attribute__((optimize("-O3"))) __attribute__ ((section (".ram_code"))) encoder_debounce_b_handler(void) {
-//	XMC_GPIO_SetOutputHigh(UARTBB_TX_PIN);
 	NVIC_ClearPendingIRQ(ENCODER_B_IRQ_N);
 	NVIC_EnableIRQ(ENCODER_B_IRQ_N);
 
@@ -76,29 +75,19 @@ void __attribute__((optimize("-O3"))) __attribute__ ((section (".ram_code"))) en
 	int8_t add = encoder_table[encoder_last_value][encoder_value];
 	encoder_count += add;
 	encoder_last_value = encoder_value;
-
-//	XMC_GPIO_SetOutputLow(UARTBB_TX_PIN);
 }
 
 
 void __attribute__((optimize("-O3"))) __attribute__ ((section (".ram_code"))) encoder_a_handler(void) {
-//	XMC_GPIO_SetOutputHigh(UARTBB_TX_PIN);
-
 	CCU40_CC40->TCCLR = CCU4_CC4_TCCLR_TCC_Msk;
 	CCU40_CC40->TCSET = CCU4_CC4_TCSET_TRBS_Msk;
 	NVIC_DisableIRQ(ENCODER_A_IRQ_N);
-
-//	XMC_GPIO_SetOutputLow(UARTBB_TX_PIN);
 }
 
 void __attribute__((optimize("-O3"))) __attribute__ ((section (".ram_code"))) encoder_b_handler(void) {
-//	XMC_GPIO_SetOutputHigh(UARTBB_TX_PIN);
-
 	CCU40_CC41->TCCLR = CCU4_CC4_TCCLR_TCC_Msk;
 	CCU40_CC41->TCSET = CCU4_CC4_TCSET_TRBS_Msk;
 	NVIC_DisableIRQ(ENCODER_B_IRQ_N);
-
-//	XMC_GPIO_SetOutputLow(UARTBB_TX_PIN);
 }
 
 void encoder_init_debounce_timer(void) {
@@ -195,6 +184,8 @@ void encoder_init_eru(void) {
 }
 
 void encoder_init(void) {
+	memset(&encoder, 0, sizeof(Encoder));
+
 	const XMC_GPIO_CONFIG_t encoder_pin_config = {
 		.mode             = XMC_GPIO_MODE_INPUT_TRISTATE,
 		.input_hysteresis = XMC_GPIO_INPUT_HYSTERESIS_STANDARD,
@@ -212,5 +203,28 @@ void encoder_init(void) {
 }
 
 void encoder_tick(void) {
+	if(system_timer_is_time_elapsed_ms(encoder.button_change_time, ENCODER_BUTTON_DEBOUNCE_TIME)) {
+		bool state = XMC_GPIO_GetInput(ENCODER_BUTTON_PIN);
+		if(state != encoder.button_last_state) {
+			encoder.button_last_state = state;
+			encoder.button_change_time = system_timer_get_ms();
+			encoder.button_callback_state = state;
+			encoder.button_callback_new = true;
+		}
+	}
+}
 
+int32_t encoder_get_count(void) {
+	NVIC_DisableIRQ(CCU40_0_IRQn);
+	NVIC_DisableIRQ(CCU40_1_IRQn);
+
+	int32_t value = encoder_count;
+	if(encoder.reset_after_get) {
+		encoder_count = 0;
+	}
+
+	NVIC_EnableIRQ(CCU40_1_IRQn);
+	NVIC_EnableIRQ(CCU40_0_IRQn);
+
+	return value/4;
 }
