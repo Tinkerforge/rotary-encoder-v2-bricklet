@@ -1,5 +1,5 @@
 /* rotary-encoder-v2-bricklet
- * Copyright (C) 2017 Olaf Lüke <olaf@tinkerforge.com>
+ * Copyright (C) 2017-2018 Olaf Lüke <olaf@tinkerforge.com>
  *
  * config.h: All configurations for Rotary Encoder V2 Bricklet
  *
@@ -28,6 +28,8 @@
 #define SYSTEM_TIMER_FREQUENCY 1000 // Use 1 kHz system timer
 
 #define UARTBB_TX_PIN P0_5
+
+#define CALLBACK_VALUE_TYPE CALLBACK_VALUE_TYPE_INT32
 
 #define FIRMWARE_VERSION_MAJOR 2
 #define FIRMWARE_VERSION_MINOR 0
