@@ -29,9 +29,7 @@
 #include "configs/config_encoder.h"
 #include "encoder.h"
 
-CallbackValue callback_value_count;
-
-extern int32_t encoder_count = 0;
+CallbackValue_int32_t callback_value_count;
 
 extern Encoder encoder;
 
@@ -42,14 +40,13 @@ typedef struct {
 
 BootloaderHandleMessageResponse handle_message(const void *message, void *response) {
 	switch(tfp_get_fid_from_message(message)) {
-		case FID_GET_COUNT: encoder.reset_after_get = ((const GetCount*)message)->reset; return get_callback_value(message, response, &callback_value_count);
-		case FID_SET_COUNT_CALLBACK_CONFIGURATION: return set_callback_value_callback_configuration(message, &callback_value_count);
-		case FID_GET_COUNT_CALLBACK_CONFIGURATION: return get_callback_value_callback_configuration(message, response, &callback_value_count);
+		case FID_GET_COUNT: encoder.reset_after_get = ((const GetCount*)message)->reset; return get_callback_value_int32_t(message, response, &callback_value_count);
+		case FID_SET_COUNT_CALLBACK_CONFIGURATION: return set_callback_value_callback_configuration_int32_t(message, &callback_value_count);
+		case FID_GET_COUNT_CALLBACK_CONFIGURATION: return get_callback_value_callback_configuration_int32_t(message, response, &callback_value_count);
 		case FID_IS_PRESSED: return is_pressed(message, response);
 		default: return HANDLE_MESSAGE_RESPONSE_NOT_SUPPORTED;
 	}
 }
-
 
 BootloaderHandleMessageResponse is_pressed(const IsPressed *data, IsPressed_Response *response) {
 	response->header.length = sizeof(IsPressed_Response);
@@ -57,11 +54,8 @@ BootloaderHandleMessageResponse is_pressed(const IsPressed *data, IsPressed_Resp
 	return HANDLE_MESSAGE_RESPONSE_NEW_MESSAGE;
 }
 
-
-
-
 bool handle_count_callback(void) {
-	return handle_callback_value_callback(&callback_value_count, FID_CALLBACK_COUNT);
+	return handle_callback_value_callback_int32_t(&callback_value_count, FID_CALLBACK_COUNT);
 }
 
 bool handle_pressed_callback(void) {
@@ -117,7 +111,7 @@ void communication_tick(void) {
 }
 
 void communication_init(void) {
-	callback_value_init(&callback_value_count, encoder_get_count);
+	callback_value_init_int32_t(&callback_value_count, encoder_get_count);
 
 	communication_callback_init();
 }
