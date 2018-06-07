@@ -1,5 +1,5 @@
 2018-02-21: 2.0.0 (fac52984)
 - Initial version
 
-<unknown>: 2.0.1 (<unknown>)
+2018-06-07: 2.0.1 (1a8cc296)
 - Fix wrong length for set/get-position-callback-configuration packets (through bricklib2)
