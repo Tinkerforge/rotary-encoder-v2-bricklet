@@ -4,5 +4,5 @@
 2018-06-07: 2.0.1 (1a8cc296)
 - Fix wrong length for set/get-position-callback-configuration packets (through bricklib2)
 
-2018-10-04: 2.0.2 (TBD)
+2018-10-04: 2.0.2 (45c96c3)
 - Fix race condition with potential buffer overflow (through bricklib2)
