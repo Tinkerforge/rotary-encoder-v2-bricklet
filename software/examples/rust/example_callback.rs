@@ -1,8 +1,5 @@
-use std::{io, error::Error};
-use std::thread;
-use tinkerforge::{ip_connection::IpConnection, 
-                  rotary_encoder_v2_bricklet::*};
-
+use std::{error::Error, io, thread};
+use tinkerforge::{ip_connection::IpConnection, rotary_encoder_v2_bricklet::*};
 
 const HOST: &str = "localhost";
 const PORT: u16 = 4223;
@@ -13,21 +10,21 @@ fn main() -> Result<(), Box<dyn Error>> {
     let re = RotaryEncoderV2Bricklet::new(UID, &ipcon); // Create device object.
 
     ipcon.connect((HOST, PORT)).recv()??; // Connect to brickd.
-    // Don't use device before ipcon is connected.
+                                          // Don't use device before ipcon is connected.
 
-     let count_receiver = re.get_count_callback_receiver();
+    let count_receiver = re.get_count_callback_receiver();
 
-        // Spawn thread to handle received callback messages. 
-        // This thread ends when the `re` object
-        // is dropped, so there is no need for manual cleanup.
-        thread::spawn(move || {
-            for count in count_receiver {           
-                		println!("Count: {}", count);
-            }
-        });
+    // Spawn thread to handle received callback messages.
+    // This thread ends when the `re` object
+    // is dropped, so there is no need for manual cleanup.
+    thread::spawn(move || {
+        for count in count_receiver {
+            println!("Count: {}", count);
+        }
+    });
 
-		// Set period for count callback to 1s (1000ms) without a threshold.
-		re.set_count_callback_configuration(1000, false, 'x', 0, 0);
+    // Set period for count callback to 1s (1000ms) without a threshold.
+    re.set_count_callback_configuration(1000, false, 'x', 0, 0);
 
     println!("Press enter to exit.");
     let mut _input = String::new();

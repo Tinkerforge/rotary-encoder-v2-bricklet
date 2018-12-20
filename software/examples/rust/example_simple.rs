@@ -1,8 +1,6 @@
-use std::{io, error::Error};
+use std::{error::Error, io};
 
-use tinkerforge::{ip_connection::IpConnection, 
-                  rotary_encoder_v2_bricklet::*};
-
+use tinkerforge::{ip_connection::IpConnection, rotary_encoder_v2_bricklet::*};
 
 const HOST: &str = "localhost";
 const PORT: u16 = 4223;
@@ -13,11 +11,11 @@ fn main() -> Result<(), Box<dyn Error>> {
     let re = RotaryEncoderV2Bricklet::new(UID, &ipcon); // Create device object.
 
     ipcon.connect((HOST, PORT)).recv()??; // Connect to brickd.
-    // Don't use device before ipcon is connected.
+                                          // Don't use device before ipcon is connected.
 
-		// Get current count without reset.
-let count = re.get_count(false).recv()?;
-		println!("Count: {}", count);
+    // Get current count without reset.
+    let count = re.get_count(false).recv()?;
+    println!("Count: {}", count);
 
     println!("Press enter to exit.");
     let mut _input = String::new();
