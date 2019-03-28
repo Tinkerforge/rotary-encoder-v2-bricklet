@@ -3,4 +3,4 @@
 setup:
 	# Get current count without reset
 	subscribe to tinkerforge/response/rotary_encoder_v2_bricklet/XYZ/get_count
-	publish '{"reset": false}' to tinkerforge/request/rotary_encoder_v2_bricklet/XYZ/get_count 
+	publish '{"reset": false}' to tinkerforge/request/rotary_encoder_v2_bricklet/XYZ/get_count
