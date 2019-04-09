@@ -7,5 +7,5 @@
 2018-10-04: 2.0.2 (45c96c3)
 - Fix race condition with potential buffer overflow (through bricklib2)
 
-2019-04-09: 2.0.3 (TBD)
+2019-04-09: 2.0.3 (ee81255)
 - Fix bug in reset count logic
