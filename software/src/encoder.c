@@ -220,6 +220,7 @@ int32_t encoder_get_count(void) {
 
 	int32_t value = encoder_count;
 	if(encoder.reset_after_get) {
+		encoder.reset_after_get = false;
 		encoder_count = 0;
 	}
 
