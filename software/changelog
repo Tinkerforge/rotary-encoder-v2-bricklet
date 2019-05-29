@@ -10,5 +10,5 @@
 2019-04-09: 2.0.3 (ee81255)
 - Fix bug in reset count logic
 
-2019-05-29: 2.0.4 (TBD)
+2019-05-29: 2.0.4 (2ae1c18)
 - Fix SPITFP IRQ race condition with other higher prio IRQs (through bricklib2)
