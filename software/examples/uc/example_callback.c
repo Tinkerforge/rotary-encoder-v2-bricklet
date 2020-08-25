@@ -1,5 +1,3 @@
-
-
 #include "bindings/hal_common.h"
 #include "bindings/bricklet_rotary_encoder_v2.h"
 
@@ -7,15 +5,12 @@
 
 void check(int rc, const char* msg);
 
-
-
 // Callback function for count callback
 void count_handler(TF_RotaryEncoderV2 *device, int32_t count, void *user_data) {
 	(void)device; (void)user_data; // avoid unused parameter warning
 
 	tf_hal_printf("Count: %d\n", count);
 }
-
 
 TF_RotaryEncoderV2 re;
 
