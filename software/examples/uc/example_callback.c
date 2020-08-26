@@ -18,15 +18,13 @@ void example_setup(TF_HalContext *hal) {
 	// Create device object
 	check(tf_rotary_encoder_v2_create(&re, UID, hal), "create device object");
 
-
 	// Register count callback to function count_handler
 	tf_rotary_encoder_v2_register_count_callback(&re,
-	                                            count_handler,
-	                                            NULL);
+	                                             count_handler,
+	                                             NULL);
 
 	// Set period for count callback to 1s (1000ms) without a threshold
 	tf_rotary_encoder_v2_set_count_callback_configuration(&re, 1000, false, 'x', 0, 0);
-
 }
 
 void example_loop(TF_HalContext *hal) {

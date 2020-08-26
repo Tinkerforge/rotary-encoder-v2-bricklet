@@ -11,13 +11,11 @@ void example_setup(TF_HalContext *hal) {
 	// Create device object
 	check(tf_rotary_encoder_v2_create(&re, UID, hal), "create device object");
 
-
 	// Get current count without reset
 	int32_t count;
 	check(tf_rotary_encoder_v2_get_count(&re, false, &count), "get count without reset");
 
 	tf_hal_printf("Count: %d\n", count);
-
 }
 
 void example_loop(TF_HalContext *hal) {
