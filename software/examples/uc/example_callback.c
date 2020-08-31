@@ -13,7 +13,7 @@ void example_loop(TF_HalContext *hal);
 static void count_handler(TF_RotaryEncoderV2 *device, int32_t count, void *user_data) {
 	(void)device; (void)user_data; // avoid unused parameter warning
 
-	tf_hal_printf("Count: %d\n", count);
+	tf_hal_printf("Count: %I32d\n", count);
 }
 
 static TF_RotaryEncoderV2 re;
