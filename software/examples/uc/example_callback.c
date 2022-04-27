@@ -1,17 +1,13 @@
 // This example is not self-contained.
-// It requres usage of the example driver specific to your platform.
+// It requires usage of the example driver specific to your platform.
 // See the HAL documentation.
 
-#include "bindings/hal_common.h"
-#include "bindings/bricklet_rotary_encoder_v2.h"
+#include "src/bindings/hal_common.h"
+#include "src/bindings/bricklet_rotary_encoder_v2.h"
 
-#define UID "XYZ" // Change XYZ to the UID of your Rotary Encoder Bricklet 2.0
-
-void check(int rc, const char* msg);
-
+void check(int rc, const char *msg);
 void example_setup(TF_HAL *hal);
 void example_loop(TF_HAL *hal);
-
 
 // Callback function for count callback
 static void count_handler(TF_RotaryEncoderV2 *device, int32_t count, void *user_data) {
@@ -24,7 +20,7 @@ static TF_RotaryEncoderV2 re;
 
 void example_setup(TF_HAL *hal) {
 	// Create device object
-	check(tf_rotary_encoder_v2_create(&re, UID, hal), "create device object");
+	check(tf_rotary_encoder_v2_create(&re, NULL, hal), "create device object");
 
 	// Register count callback to function count_handler
 	tf_rotary_encoder_v2_register_count_callback(&re,
