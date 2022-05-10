@@ -20,7 +20,7 @@ func main() {
 
 	// Get current count without reset.
 	count, _ := re.GetCount(false)
-	fmt.Printf("Count: \n", count)
+	fmt.Printf("Count: %d\n", count)
 
 	fmt.Print("Press enter to exit.")
 	fmt.Scanln()
